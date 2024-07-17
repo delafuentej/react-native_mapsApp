@@ -1,14 +1,16 @@
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable prettier/prettier */
-import './gesture-handler';
+import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { StackNavigator } from './presentation/navigation/StackNavigator';
+import { PremissionsChecker } from './presentation/providers/PermissionsChecker';
 
-const App = () => {
+export const App = () => {
   return(
     <NavigationContainer>
-      <StackNavigator />
+      <PremissionsChecker>
+        <StackNavigator />
+      </PremissionsChecker>
     </NavigationContainer>
   );
 };
-export default App;
