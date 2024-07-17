@@ -8,7 +8,7 @@ export const LoadingScreen = () => {
   return (
     <View>
         <Text>LoadingScreen </Text>
-        <Icon name="reload-outline" size={30} color="#900" />
+        <Icon name="refresh" size={30} color="#900" />
 
     </View>
   );

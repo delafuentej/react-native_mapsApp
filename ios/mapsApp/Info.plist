@@ -8,6 +8,16 @@
 		<string>Ionicons.ttf</string>
 	</array>
 
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+  	<string>It is necessary to get your location in order to display the map.</string>
+  	<key>NSLocationTemporaryUsageDescriptionDictionary</key>
+  	<dict>
+    <key>YOUR-PURPOSE-KEY</key>
+    <string>It is necessary to get your location in order to display the map.</string>
+  	</dict>
+  	<key>NSLocationWhenInUseUsageDescription</key>
+  	<string>It is necessary to get your location in order to display the map.</string>
+  
 	
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
