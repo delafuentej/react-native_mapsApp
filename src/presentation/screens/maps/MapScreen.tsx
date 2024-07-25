@@ -1,31 +1,20 @@
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable prettier/prettier */
-import { Platform, StyleSheet, View } from 'react-native';
-import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import {  StyleSheet, View } from 'react-native';
+import { CustomMap } from '../../components/maps/CustomMap';
+
 
 export const MapScreen = () => {
-  return (
+  return(
     <View style={styles.container}>
-    <MapView
-      provider={Platform.OS === 'ios' ? undefined : PROVIDER_GOOGLE} // remove if not using Google Maps
-      style={styles.map}
-      region={{
-        latitude: 37.78825,
-        longitude: -122.4324,
-        latitudeDelta: 0.015,
-        longitudeDelta: 0.0121,
-      }}
-    >
-    </MapView>
-  </View>
+        <CustomMap />
+      
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    ...StyleSheet.absoluteFillObject,
-  },
-  map: {
     ...StyleSheet.absoluteFillObject,
   },
  });
