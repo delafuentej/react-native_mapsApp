@@ -1,7 +1,7 @@
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable prettier/prettier */
-import { ActivityIndicator, Text, View } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import { ActivityIndicator,  View } from 'react-native';
+
 
 
 export const LoadingScreen = () => {

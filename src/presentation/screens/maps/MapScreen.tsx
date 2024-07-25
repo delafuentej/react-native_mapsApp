@@ -17,7 +17,7 @@ export const MapScreen = () => {
      if(lastKnownLocation === null){
        getLocation();
      }
-   }, [])
+   }, []);
 
    if( lastKnownLocation === null){
      return(<LoadingScreen />);

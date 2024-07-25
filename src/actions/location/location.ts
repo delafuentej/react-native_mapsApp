@@ -22,5 +22,4 @@ export const getCurrentLocation = async(): Promise<Location> =>{
             },
         );
     });
-    
 };
