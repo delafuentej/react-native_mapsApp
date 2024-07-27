@@ -7,34 +7,41 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 interface Props {
     iconName: string;
-    style?: StyleProp<ViewStyle>;
     onPress: ()=> void;
+    style?: StyleProp<ViewStyle>;
 }
-export const FAB = ({iconName, style, onPress}: Props) => {
-    <View style={[styles.btn, style]}>
+
+export const CustomFaButton = ({iconName, style, onPress}: Props) => {
+   return( <View style={[styles.btn, style]}>
         <Pressable
+            style={styles.btnCircle}
             onPress={onPress}
         >
-            <Icon name={iconName} size={30} color='white' />
+            <Icon name={iconName} size={60} color='rgba(255,255,255,0.7)' />
         </Pressable>
-    </View>
+    </View>)
 };
 
 const styles = StyleSheet.create({
     btn: {
       zIndex: 1,
       position: 'absolute',
-      height: 50,
-      width: 50,
+      height: 60,
+      width: 60,
       borderRadius: 30,
-      backgroundColor: 'black',
-      justifyContent: 'center',
+      backgroundColor: 'rgba(0,0,0,0.7)',
+      justifyContent:'center',
       alignItems: 'center',
       shadowOpacity: 0.3,
       shadowOffset: {
-        height: 0.27,
+        height: 0.5,
         width: 4.5,
       },
-      elevation: 5,
+       elevation: 5,
     },
+    btnCircle:{
+       
+        justifyContent:'center',
+        alignItems: 'center',
+    }
   });
