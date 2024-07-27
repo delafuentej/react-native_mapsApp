@@ -3,7 +3,7 @@
 /* eslint-disable prettier/prettier */
 
 import { Platform } from 'react-native';
-import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
+import MapView, { Marker, Polyline, PROVIDER_GOOGLE } from 'react-native-maps';
 import { Location } from '../../../infrastructure/interfaces/location';
 import { useEffect, useRef, useState } from 'react';
 import { useLocationStore } from '../../store/location/useLocationStore';
@@ -22,9 +22,11 @@ export const CustomMap = ({ showsUserLocation = true, initialLocation}: Props) =
     // cameraLocation =>so as not to return to the initialLocation each time the fab button is pressed:
     const cameraLocation = useRef<Location>(initialLocation);
 
-    const {getLocation, lastKnownLocation, watchLocation, clearWatchLocation} = useLocationStore();
+    const {getLocation, lastKnownLocation, watchLocation, clearWatchLocation, userLocationsHistory} = useLocationStore();
 
     const [isFollowingUser, setIsFollowingUser ] = useState(true);
+    const [isShowingPolyline, setIsShowingPolyline ] = useState(true);
+
 
 
     const moveCameraToLocation = (location: Location) =>{
@@ -72,6 +74,18 @@ export const CustomMap = ({ showsUserLocation = true, initialLocation}: Props) =
                 longitudeDelta: 0.0121,
              }}
             >
+                {/* polylines */}
+                { 
+                    isShowingPolyline && (<Polyline 
+                    coordinates={userLocationsHistory}
+                    strokeColor='orange'
+                    strokeWidth={5}
+                />)
+                }
+
+                
+
+
                 {/* <Marker 
                     coordinate={{
                         latitude: 37.78825,
@@ -82,7 +96,11 @@ export const CustomMap = ({ showsUserLocation = true, initialLocation}: Props) =
                     image={require('../../../assets/custom-marker.png')}
                 /> */}
             </MapView>
-            
+            <CustomFaButton
+                iconName={isShowingPolyline ? 'eye-outline' : 'eye-off-outline'}
+                onPress={()=> setIsShowingPolyline(!isShowingPolyline)}
+                style={{ bottom: 160, right: 20}}
+            />
             <CustomFaButton
                 iconName={isFollowingUser ? 'walk-outline' : 'accessibility-outline'}
                 onPress={()=> setIsFollowingUser(!isFollowingUser)}
