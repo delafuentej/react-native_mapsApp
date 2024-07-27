@@ -5,7 +5,7 @@
 import { Platform } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { Location } from '../../../infrastructure/interfaces/location';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useLocationStore } from '../../store/location/useLocationStore';
 import { CustomFaButton} from '../ui/CustomFaButton';
 
@@ -22,18 +22,36 @@ export const CustomMap = ({ showsUserLocation = true, initialLocation}: Props) =
     // cameraLocation =>so as not to return to the initialLocation each time the fab button is pressed:
     const cameraLocation = useRef<Location>(initialLocation);
 
-    const {getLocation, lastKnownLocation} = useLocationStore();
+    const {getLocation, lastKnownLocation, watchLocation, clearWatchLocation} = useLocationStore();
 
     const moveCameraToLocation = (location: Location) =>{
         if(!mapRef.current) return;
         mapRef.current.animateCamera({center: location});
     };
     const moveToCurrentLocation = async() => {
-        if(!lastKnownLocation) return;
+        if(!lastKnownLocation){
+            moveCameraToLocation(initialLocation);
+        }
         const location = await getLocation();
         if(!location) return;
         return moveCameraToLocation(location);
     };
+
+    //useEffect => immediately after assembly of the component start to follow the user
+    useEffect(()=>{
+        watchLocation();
+
+        return ()=> {
+            clearWatchLocation();
+        };
+    },[]);
+
+    // move the camera for each change in lastKnownLocation
+    useEffect(()=>{
+        if(lastKnownLocation){
+            moveCameraToLocation(lastKnownLocation);
+        }
+    },[lastKnownLocation]);
 
     return(
         <>
