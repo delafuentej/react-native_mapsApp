@@ -22,13 +22,14 @@ export const CustomMap = ({ showsUserLocation = true, initialLocation}: Props) =
     // cameraLocation =>so as not to return to the initialLocation each time the fab button is pressed:
     const cameraLocation = useRef<Location>(initialLocation);
 
-    const {getLocation} = useLocationStore();
+    const {getLocation, lastKnownLocation} = useLocationStore();
 
     const moveCameraToLocation = (location: Location) =>{
         if(!mapRef.current) return;
         mapRef.current.animateCamera({center: location});
     };
     const moveToCurrentLocation = async() => {
+        if(!lastKnownLocation) return;
         const location = await getLocation();
         if(!location) return;
         return moveCameraToLocation(location);

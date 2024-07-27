@@ -17,7 +17,7 @@ export const CustomFaButton = ({iconName, style, onPress}: Props) => {
             style={styles.btnCircle}
             onPress={onPress}
         >
-            <Icon name={iconName} size={60} color='rgba(255,255,255,0.7)' />
+            <Icon name={iconName} size={40} color='rgba(255,255,255,0.7)' />
         </Pressable>
     </View>)
 };
